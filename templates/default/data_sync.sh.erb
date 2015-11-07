@@ -1,0 +1,22 @@
+#!/bin/bash
+
+REPLICA_IP=<%= @replica_ip %>
+sed -e "s/__REPLICA_IP__/${REPLICA_IP}/" setup_master.sql.tmp > setup_master.sql
+
+/usr/bin/mysql -u root -p<%= @root_password %> < /root/setup_master.sql
+/usr/bin/mysql -u root -p<%= @root_password %> -e 'SHOW MASTER STATUS;' > /root/master_status.txt
+
+LOGFILE=`awk '{if (/^bin/) print $1}' master_status.txt`
+POSITION=`awk '{if (/^bin/) print $2}' master_status.txt`
+sed -e "s/__LOGFILE__/${LOGFILE}/" -e "s/__POSITION__/${POSITION}/" start_replica.tmp > start_replica.sh
+
+
+scp -r /data1/* $REPLICA_IP:/data1
+scp -r /data2/* $REPLICA_IP:/data2
+scp /root/master_status.txt  $REPLICA_IP:/root
+scp /root/start_replica.sh   $REPLICA_IP:/root
+ssh root@$REPLICA_IP "chown -R mysql:mysql /data[12]"
+ssh root@$REPLICA_IP "chmod 755 start_replica.sh"
+
+
+/usr/bin/mysql -u root -p<%= @root_password %> -e "UNLOCK TABLES;"

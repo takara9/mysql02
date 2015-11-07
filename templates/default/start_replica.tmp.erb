@@ -1,0 +1,11 @@
+#!/bin/bash
+
+service mysql start
+sleep 10
+mysql -u root -p<%= @root_password %> -e "UNLOCK TABLES; \
+CHANGE MASTER TO MASTER_HOST='<%= @master_ip %>',MASTER_USER='<%= @username %>',MASTER_PASSWORD='<%= @password %>', \
+MASTER_LOG_FILE='__LOGFILE__',MASTER_LOG_POS=__POSITION__; \
+START SLAVE;
+"
+
+
