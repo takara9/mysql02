@@ -1,5 +1,8 @@
 mysql02 Cookbook
 ================
+MySQL のマスター＆レプリカを構成するクックブック
+
+
 TODO: Enter the cookbook description here.
 
 e.g.
