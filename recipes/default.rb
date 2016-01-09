@@ -12,7 +12,8 @@
 
 work_dir = '/root/mysql'
 conf_dir = '/etc/mysql'
-ubuntu_ver = '5.6.27-1ubuntu14.04_amd64'
+#ubuntu_ver = '5.6.27-1ubuntu14.04_amd64'
+ubuntu_ver = '5.6.28-1ubuntu14.04_amd64'
 centos6_ver = '5.6.27-1.el6.x86_64'
 centos7_ver = '5.6.27-1.el7.x86_64'
 
