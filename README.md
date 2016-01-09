@@ -54,6 +54,21 @@ Just include `mysql01` in your node's `run_list`:
 }
 ```
 
+
+```bash
+# curl -L https://www.opscode.com/chef/install.sh | bash
+# knife cookbook create dummy -o /var/chef/cookbooks
+# cd /var/chef/cookbooks
+# git clone https://github.com/customink-webops/hostsfile
+# git clone https://github.com/takara9/mysql02
+```
+
+
+```
+# chef-solo -o mysql01
+```
+
+
 Contributing
 ------------
 TODO: (optional) If this is a public cookbook, detail the process for contributing. If this is a private cookbook, remove this section.
