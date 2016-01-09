@@ -32,7 +32,7 @@ when 'ubuntu'
   package 'libaio1'
 
   # https://dev.mysql.com/downloads/mysql/ のサイトからMySQLのtarファイルのURLを拾って指定
-  tar_url = 'http://dev.mysql.com/get/Downloads/MySQL-5.6/mysql-server_#{ubuntu_ver}.deb-bundle.tar'
+  tar_url = "http://dev.mysql.com/get/Downloads/MySQL-5.6/mysql-server_#{ubuntu_ver}.deb-bundle.tar"
 
 when 'centos','redhat'
   execute 'yum update' do
@@ -47,10 +47,10 @@ when 'centos','redhat'
   # https://dev.mysql.com/downloads/mysql/ のサイトからMySQLのtarファイルのURLを拾って指定
   case node['platform_version'].to_i
     when 6
-      tar_url = 'http://dev.mysql.com/get/Downloads/MySQL-5.6/MySQL-#{centos6_ver}.rpm-bundle.tar'    
+      tar_url = "http://dev.mysql.com/get/Downloads/MySQL-5.6/MySQL-#{centos6_ver}.rpm-bundle.tar"
     when 7
       package 'net-tools'
-      tar_url = 'http://dev.mysql.com/get/Downloads/MySQL-5.6/MySQL-#{centos7_ver}.rpm-bundle.tar'
+      tar_url = "http://dev.mysql.com/get/Downloads/MySQL-5.6/MySQL-#{centos7_ver}.rpm-bundle.tar"
   end
 end
 

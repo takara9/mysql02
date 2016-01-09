@@ -1,4 +1,0 @@
-GRANT REPLICATION SLAVE ON *.* TO '<%= @username %>'@'<%= @replica_ip %>' IDENTIFIED BY '<%= @password %>';
-FLUSH TABLES WITH READ LOCK;
-SHOW MASTER STATUS;
-
