@@ -1,5 +1,7 @@
 #!/bin/bash
 
+rm -f /data1/auto.cnf
+
 service mysql start
 sleep 10
 mysql -u root -p<%= @root_password %> -e "UNLOCK TABLES; \
