@@ -55,7 +55,7 @@ Just include `mysql01` in your node's `run_list`:
 ```
 
 
-```bash
+```
 # curl -L https://www.opscode.com/chef/install.sh | bash
 # knife cookbook create dummy -o /var/chef/cookbooks
 # cd /var/chef/cookbooks
@@ -70,17 +70,17 @@ Just include `mysql01` in your node's `run_list`:
 
 
 
-master node
+at master node
 
 ```
-# data_sync.sh
+# /root/data_sync.sh
 
 ```
 
-replica node
+at slave node
 
 ```
-# start_replica.sh
+# /root/start_replica.sh
 
 ```
 
