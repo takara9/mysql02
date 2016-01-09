@@ -65,8 +65,30 @@ Just include `mysql01` in your node's `run_list`:
 
 
 ```
-# chef-solo -o mysql01
+# chef-solo -o mysql02
 ```
+
+
+
+master node
+
+```
+# data_sync.sh
+
+```
+
+replica node
+
+```
+# start_replica.sh
+
+```
+
+
+
+
+
+
 
 
 Contributing
