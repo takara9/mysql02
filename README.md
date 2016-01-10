@@ -11,10 +11,20 @@ MySQL 5.6.28 をダウンロードして、マスターとスレーブのサー�
 
 Requirements
 ------------
-オペレーティングシステム: Ubuntu14.04, CentOS6, CentOS7
+###オペレーティングシステム
+* CentOS 6.x - Minimal Install (64 bit)
+* CentOS 7.x - Minimal Install (64 bit)
+* Ubuntu Linux 14.04 LTS Trusty Tahr - Minimal Install (64 bit)
 
-パッケージ: hostfiles
+###パッケージ
+* hostsfile https://github.com/customink-webops/hostsfile
 
+###プロビジョニング・スクリプト
+OSに対応したプロビジョニング・スクリプトを利用します。
+
+* CentOS 6.x https://github.com/takara9/ProvisioningScript/blob/master/centos_basic_config
+* CentOS 7.x https://github.com/takara9/ProvisioningScript/blob/master/centos7_basic_config
+* Ubuntu 14.04 https://github.com/takara9/ProvisioningScript/blob/master/ubuntu_basic_config
 
 
 Attributes
