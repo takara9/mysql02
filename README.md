@@ -1,26 +1,25 @@
 mysql02 Cookbook
 ================
-MySQL のマスター＆レプリカを構成するクックブック
+MySQLサーバーのマスター＆レプリカを構成するクックブック
 
+MySQL 5.6.28 をダウンロードして、マスターとスレーブのサーバー構成できます。
+データのレプリカは、このクックブックを適用することで生成されるシェルを実行することで、
+簡単にスレーブサーバ上にレプリカを構成することができます。
 
-TODO: Enter the cookbook description here.
+一つのマスターに対して複数のスレーブを作りデータのレプリカを増やしていけます。
 
-e.g.
-This cookbook makes your favorite breakfast sandwich.
 
 Requirements
 ------------
-TODO: List your cookbook requirements. Be sure to include any requirements this cookbook has on platforms, libraries, other cookbooks, packages, operating systems, etc.
+オペレーティングシステム: Ubuntu14.04, CentOS6, CentOS7
 
-e.g.
-#### packages
-- `toaster` - mysql01 needs toaster to brown your bagel.
+パッケージ: hostfiles
+
+
 
 Attributes
 ----------
-TODO: List your cookbook attributes here.
 
-e.g.
 #### mysql01::default
 <table>
   <tr>
@@ -39,7 +38,7 @@ e.g.
 
 <tr>
   <td>default["mysql"]["server_id"]</td>
-  <td>Number 1 - 65536</td>
+  <td>Number (1 - 65536)</td>
   <td>MySQL ServerのID 一意であること</td>
   <td>100</td>
 </tr>
@@ -82,8 +81,8 @@ e.g.
 <tr>
   <td>default["mysql"]["role"]</td>
   <td>Text</td>
-  <td>役割</td>
-  <td>master/slave</td>
+  <td>役割 master/slave 択一</td>
+  <td>master</td>
 </tr>
 
 </table>
