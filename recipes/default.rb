@@ -90,7 +90,8 @@ when 'centos','redhat'
       #  action :remove
       #end
       execute "delete mysql-libs-5.1.73-5.el6_6.x86_64" do
-        command "rpm -e --nodeps mysql-libs-5.1.73-5.el6_6.x86_64"
+        #command "rpm -e --nodeps mysql-libs-5.1.73-5.el6_6.x86_64"
+        command "rpm -e --nodeps mysql-libs"
         action :run
         ignore_failure true
       end
@@ -105,8 +106,9 @@ when 'centos','redhat'
       #rpm_package "mariadb-libs-5.5.44-1.el7_1.x86_64" do
       #  action :remove
       #end
-      execute "delete mariadb-libs-5.5.44-1.el7_1.x86_64" do
-        command "rpm -e --nodeps mariadb-libs-5.5.44-1.el7_1.x86_64"
+      execute "delete mariadb-libs" do
+        #command "rpm -e --nodeps mariadb-libs-5.5.44-1.el7_1.x86_64"
+        command "rpm -e --nodeps mariadb-libs"
         action :run
         ignore_failure true
       end
