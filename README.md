@@ -218,6 +218,66 @@ Last_IO_Error: Fatal error: The slave I/O thread stops because master and slave 
 ```
 
 
+レプリカの追加
+---------------
+
+このクックブックでは、容易にスレーブサーバーを追加することができます。
+追加するサーバーのアトリビュートを次の例に従って編集します。
+
+対象ファイル /var/chef/cookbooks/mysql02/attributes/default.rb
+
+```
+default["mysql"]["root_password"] = 'passw0rd'
+default["mysql"]["server_id"] = '104'          <-- 既存のサーバと重複しない一意のID
+default["mysql"]["bin_log"] = '/data2/bin_log'
+default["mysql"]["master_ip"] = '10.132.253.30'   <-- マスターのIPアドレス
+default["mysql"]["replica_ip1"] = '10.132.253.39' <-- 追加サーバのIPアドレス
+default["mysql"]["replica_username"] = 'replica'
+default["mysql"]["replica_password"] = 'replica'
+default["mysql"]["role"] = 'slave'  <-- スレーブ（レプリカ）を選択
+```
+
+編集が終わったら、クックブックを適用します。そして、マスターサーバーの以下の
+/root/data_sync.shファイルのREPLICA_IPを追加するIPアドレスに変更します。
+
+```
+#!/bin/bash
+
+REPLICA_IP=10.132.253.38  <-- 追加するサーバーのIPアドレス
+sed -e "s/__REPLICA_IP__/${REPLICA_IP}/" setup_master.sql.tmp > setup_master.sql
+以下省略
+```
+
+マスターサーバー側で、次のコマンドを実行して、MySQLのデータを転送します。
+
+```
+[root@db1 ~]# /root/data_sync.sh 
+```
+
+スレーブサーバー側で、次のシェルを実行します。
+
+```
+[root@db3 ~]# /root/start_replica.sh 
+```
+
+これでレプリカサーバーが追加されました。確認するにはmysqlのクライアントから、次の様に実行します。
+
+```
+mysql> show slave hosts;
++-----------+------+------+-----------+--------------------------------------+
+| Server_id | Host | Port | Master_id | Slave_UUID                           |
++-----------+------+------+-----------+--------------------------------------+
+|       102 |      | 3306 |       100 | 9d5fc0c8-b753-11e5-b8f7-06b648cd4b4f |
+|       104 |      | 3306 |       100 | 932b13f5-b761-11e5-b952-06d41931291a |
++-----------+------+------+-----------+--------------------------------------+
+2 rows in set (0.00 sec)
+```
+
+マスターサーバで実行されたコマンドが、２つのスレーブサーバーに反映される様になります。
+一方で、スレーブサーバーで実行された結果は、他のサーバーに伝播しないので注意が必要です。
+
+
+
 License and Authors
 -------------------
 Authors: Maho Takara
