@@ -52,6 +52,7 @@ when 'centos','redhat'
       tar_url = "http://dev.mysql.com/get/Downloads/MySQL-5.6/MySQL-#{centos6_ver}.rpm-bundle.tar"
     when 7
       package 'net-tools'
+      package 'perl-Data-Dumper'
       tar_url = "http://dev.mysql.com/get/Downloads/MySQL-5.6/MySQL-#{centos7_ver}.rpm-bundle.tar"
   end
 end
