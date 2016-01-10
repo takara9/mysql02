@@ -310,7 +310,7 @@ end
 
 
 #
-# データベースを作成
+# マスターサーバー用ツール
 #
 replica_username = node["mysql"]["replica_username"]
 replica_password = node["mysql"]["replica_password"]
@@ -326,7 +326,8 @@ template "/root/setup_master.sql.tmp" do
     :username => replica_username,
     :password => replica_password,
   })
-  only_if {node["mysql"]["role"] == 'master'}
+  # スレーブでも作っておく
+  #only_if {node["mysql"]["role"] == 'master'}
 end
 
 template "/root/start_replica.tmp" do
@@ -352,12 +353,40 @@ template "/root/data_sync.sh" do
   variables({
     :root_password => root_password,
     :replica_ip => replica_ipaddr,
-    :root_password => root_password,
   })
   only_if {node["mysql"]["role"] == 'master'}
 end
 
+#
+# スレーブがマスターに昇格するためのツール
+#
 
+template "/root/start_replica.tmp" do
+  owner "root"
+  group "root"
+  mode 0644
+  source "start_replica.tmp.erb"
+  variables({
+    :username => replica_username,
+    :password => replica_password,
+    :root_password => root_password,
+    :replica_ip => "must be chagned",
+    :master_ip => replica_ipaddr,
+  })
+  only_if {node["mysql"]["role"] == 'slave'}
+end
+
+template "/root/data_sync.sh" do
+  owner "root"
+  group "root"
+  mode 0755
+  source "data_sync.sh.erb"
+  variables({
+    :root_password => root_password,
+    :replica_ip => "must be changed",
+  })
+  only_if {node["mysql"]["role"] == 'slave'}
+end
 
 
 
