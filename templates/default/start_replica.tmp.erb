@@ -4,6 +4,13 @@ rm -f /data1/auto.cnf
 
 service mysql start
 sleep 10
+
+# スレーブ再開用
+#mysql -u root -p<%= @root_password %> -e "UNLOCK TABLES; \
+#STOP SLAVE; \
+#RESET MASTER;
+#"
+
 mysql -u root -p<%= @root_password %> -e "UNLOCK TABLES; \
 CHANGE MASTER TO MASTER_HOST='<%= @master_ip %>',MASTER_USER='<%= @username %>',MASTER_PASSWORD='<%= @password %>', \
 MASTER_LOG_FILE='__LOGFILE__',MASTER_LOG_POS=__POSITION__; \
