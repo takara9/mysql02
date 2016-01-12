@@ -1,4 +1,8 @@
-GRANT REPLICATION SLAVE ON *.* TO '<%= @username %>'@'__REPLICA_IP__' IDENTIFIED BY '<%= @password %>';
+-- GRANT REPLICATION SLAVE ON *.* TO '<%= @username %>'@'__REPLICA_IP__' IDENTIFIED BY '<%= @password %>';
+
+GRANT REPLICATION SLAVE ON *.* TO '<%= @username %>'@'%' IDENTIFIED BY '<%= @password %>';
+GRANT SUPER,REPLICATION SLAVE,REPLICATION CLIENT,PROCESS ON *.* TO '<%= @username %>'@'localhost' IDENTIFIED BY '<%= @password %>';
+
 FLUSH TABLES WITH READ LOCK;
 SHOW MASTER STATUS;
 
